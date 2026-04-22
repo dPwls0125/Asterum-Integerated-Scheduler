@@ -1,35 +1,35 @@
 /* ===== Asterum Scheduler — Design System ===== */
 :root {
   /* Colors */
-  --bg-primary: #0a0e1a;
-  --bg-secondary: #111827;
-  --bg-card: rgba(17, 24, 39, 0.8);
-  --bg-glass: rgba(255, 255, 255, 0.03);
-  --bg-glass-hover: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(139, 92, 246, 0.5);
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-card: rgba(20, 20, 20, 0.8);
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --bg-glass-hover: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-focus: rgba(233, 44, 97, 0.5);
 
   --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
 
-  --accent-violet: #8b5cf6;
-  --accent-violet-light: #a78bfa;
+  --accent-primary: #E92C61;
+  --accent-primary-light: #F05C85;
   --accent-cyan: #06b6d4;
   --accent-cyan-light: #22d3ee;
   --accent-gold: #f59e0b;
   --accent-rose: #f43f5e;
   --accent-emerald: #10b981;
 
-  --gradient-primary: linear-gradient(135deg, #8b5cf6, #06b6d4);
-  --gradient-card: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.05));
+  --gradient-primary: linear-gradient(135deg, #E92C61, #FF4B72);
+  --gradient-card: linear-gradient(135deg, rgba(233, 44, 97, 0.1), rgba(255, 75, 114, 0.05));
   --gradient-gold: linear-gradient(135deg, #f59e0b, #f97316);
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 20px rgba(233, 44, 97, 0.25);
 
   /* Typography */
   --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -94,27 +94,21 @@ body {
 .app-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .app-logo-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-glow);
+  padding-top: 4px; /* 로고와 텍스트 베이스라인 미세 조정 */
 }
 
 .app-logo h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  line-height: 1.2;
+  color: var(--text-primary);
 }
 
 .app-logo span {
@@ -161,7 +155,7 @@ body {
 .calendar-nav button:hover {
   background: var(--bg-glass-hover);
   color: var(--text-primary);
-  border-color: var(--accent-violet);
+  border-color: var(--accent-primary);
 }
 
 .btn-today {
@@ -177,9 +171,9 @@ body {
 }
 
 .btn-today:hover {
-  background: var(--accent-violet);
+  background: var(--accent-primary);
   color: white;
-  border-color: var(--accent-violet);
+  border-color: var(--accent-primary);
 }
 
 .calendar-grid {
@@ -226,7 +220,7 @@ body {
 }
 
 .calendar-cell.today {
-  background: rgba(139, 92, 246, 0.05);
+  background: rgba(233, 44, 97, 0.05);
 }
 
 .cell-date {
@@ -237,7 +231,7 @@ body {
 }
 
 .calendar-cell.today .cell-date {
-  color: var(--accent-violet);
+  color: var(--accent-primary);
   font-weight: 700;
 }
 
@@ -274,9 +268,9 @@ body {
 }
 
 .cell-event.recurring {
-  background: rgba(139, 92, 246, 0.2);
-  color: var(--accent-violet-light);
-  border-left: 2px solid var(--accent-violet);
+  background: rgba(233, 44, 97, 0.2);
+  color: var(--accent-primary-light);
+  border-left: 2px solid var(--accent-primary);
 }
 
 .cell-more {
@@ -310,7 +304,7 @@ body {
 .btn-primary:hover {
   filter: brightness(1.15);
   transform: translateY(-1px);
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 30px rgba(233, 44, 97, 0.3);
 }
 
 .btn-secondary {
@@ -447,7 +441,7 @@ body {
 .form-select:focus,
 .form-textarea:focus {
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(233, 44, 97, 0.1);
 }
 
 .form-textarea {
@@ -485,7 +479,7 @@ body {
 .form-check input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  accent-color: var(--accent-violet);
+  accent-color: var(--accent-primary);
   cursor: pointer;
 }
 
@@ -516,9 +510,9 @@ body {
 }
 
 .participant-chip.selected {
-  border-color: var(--accent-violet);
-  background: rgba(139, 92, 246, 0.15);
-  color: var(--accent-violet-light);
+  border-color: var(--accent-primary);
+  background: rgba(233, 44, 97, 0.15);
+  color: var(--accent-primary-light);
 }
 
 .participant-chip.artist.selected {
@@ -592,8 +586,8 @@ body {
 }
 
 .detail-badge.recurring {
-  background: rgba(139, 92, 246, 0.15);
-  color: var(--accent-violet-light);
+  background: rgba(233, 44, 97, 0.15);
+  color: var(--accent-primary-light);
 }
 
 .detail-badge.onetime {
@@ -635,16 +629,16 @@ body {
 
 .scope-option:hover {
   background: var(--bg-glass-hover);
-  border-color: var(--accent-violet);
+  border-color: var(--accent-primary);
 }
 
 .scope-option.selected {
-  border-color: var(--accent-violet);
-  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--accent-primary);
+  background: rgba(233, 44, 97, 0.1);
 }
 
 .scope-option input[type="radio"] {
-  accent-color: var(--accent-violet);
+  accent-color: var(--accent-primary);
 }
 
 .scope-option-text h4 {
@@ -673,8 +667,8 @@ body {
 }
 
 .recurrence-toggle.active {
-  border-color: var(--accent-violet);
-  background: rgba(139, 92, 246, 0.08);
+  border-color: var(--accent-primary);
+  background: rgba(233, 44, 97, 0.08);
 }
 
 .recurrence-settings {
