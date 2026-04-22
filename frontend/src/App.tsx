@@ -5,7 +5,6 @@ import Calendar from './components/calendar/Calendar';
 import ScheduleModal from './components/schedule/ScheduleModal';
 import ScheduleDetail from './components/schedule/ScheduleDetail';
 import Toast from './components/ui/Toast';
-import { Star } from 'lucide-react';
 
 export default function App() {
   const today = new Date();
@@ -132,7 +131,7 @@ export default function App() {
       <header className="app-header">
         <div className="app-logo">
           <div className="app-logo-icon">
-            <Star size={22} color="white" />
+            <img src="https://vlast.com/wp-content/uploads/2023/12/vlast_logo_wh.svg" alt="VLAST Logo" style={{ height: '22px' }} />
           </div>
           <div>
             <h1>ASTERUM</h1>
