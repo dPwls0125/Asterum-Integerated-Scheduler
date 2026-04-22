@@ -19,4 +19,4 @@ VOLUME /app/data
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar", "--spring.datasource.url=jdbc:h2:file:/app/data/scheduler"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

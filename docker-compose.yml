@@ -1,13 +1,38 @@
 services:
+  db:
+    image: postgres:16-alpine
+    container_name: asterum-db
+    environment:
+      POSTGRES_DB: scheduler
+      POSTGRES_USER: asterum
+      POSTGRES_PASSWORD: asterum_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U asterum -d scheduler"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   backend:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: asterum-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/scheduler
+      SPRING_DATASOURCE_USERNAME: asterum
+      SPRING_DATASOURCE_PASSWORD: asterum_password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
       - "8080:8080"
-    volumes:
-      - scheduler-data:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/api/teams"]
       interval: 10s
@@ -26,4 +51,4 @@ services:
         condition: service_healthy
 
 volumes:
-  scheduler-data:
+  pg-data:
