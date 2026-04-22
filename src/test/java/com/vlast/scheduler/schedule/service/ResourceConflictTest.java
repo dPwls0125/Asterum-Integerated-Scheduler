@@ -59,11 +59,9 @@ class ResourceConflictTest {
                 LocalTime.of(10, 0), LocalTime.of(12, 0), STUDIO_A));
 
         // when & then: 같은 날 같은 장소 11:00~13:00 예약 → 시간이 겹치므로 충돌
-        assertThatThrownBy(() ->
-                scheduleService.createSchedule(request(
-                        "인터뷰 촬영", LocalDate.of(2026, 7, 1),
-                        LocalTime.of(11, 0), LocalTime.of(13, 0), STUDIO_A))
-        ).isInstanceOf(ResourceConflictException.class);
+        assertThatThrownBy(() -> scheduleService.createSchedule(request(
+                "인터뷰 촬영", LocalDate.of(2026, 7, 1),
+                LocalTime.of(11, 0), LocalTime.of(13, 0), STUDIO_A))).isInstanceOf(ResourceConflictException.class);
     }
 
     @Test
@@ -131,8 +129,8 @@ class ResourceConflictTest {
         int threadCount = 2;
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         CountDownLatch readyLatch = new CountDownLatch(threadCount); // 두 스레드가 모두 준비될 때까지 대기
-        CountDownLatch startLatch = new CountDownLatch(1);           // 동시에 시작하기 위한 신호
-        CountDownLatch doneLatch = new CountDownLatch(threadCount);  // 두 스레드가 모두 끝날 때까지 대기
+        CountDownLatch startLatch = new CountDownLatch(1); // 동시에 시작하기 위한 신호
+        CountDownLatch doneLatch = new CountDownLatch(threadCount); // 두 스레드가 모두 끝날 때까지 대기
 
         AtomicInteger successCount = new AtomicInteger(0);
         AtomicInteger conflictCount = new AtomicInteger(0);
@@ -147,8 +145,8 @@ class ResourceConflictTest {
             final String title = "동시 예약 " + (i + 1);
             executor.submit(() -> {
                 try {
-                    readyLatch.countDown();   // 준비 완료 알림
-                    startLatch.await();       // 시작 신호 대기 (동시 출발)
+                    readyLatch.countDown(); // 준비 완료 알림
+                    startLatch.await(); // 시작 신호 대기 (동시 출발)
 
                     ScheduleResponse response = scheduleService.createSchedule(
                             request(title, date, start, end, STUDIO_A));
@@ -165,9 +163,9 @@ class ResourceConflictTest {
             });
         }
 
-        readyLatch.await();    // 두 스레드 모두 준비될 때까지 대기
+        readyLatch.await(); // 두 스레드 모두 준비될 때까지 대기
         startLatch.countDown(); // 동시 출발 신호!
-        doneLatch.await();      // 결과 대기
+        doneLatch.await(); // 결과 대기
 
         executor.shutdown();
 
@@ -188,7 +186,7 @@ class ResourceConflictTest {
     @Test
     @DisplayName("Race Condition: 10개 스레드 동시 예약 → 1개만 성공")
     void 대량_동시_예약_비관적_락_테스트() throws InterruptedException {
-        int threadCount = 10;
+        int threadCount = 100;
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         CountDownLatch readyLatch = new CountDownLatch(threadCount);
         CountDownLatch startLatch = new CountDownLatch(1);
@@ -234,7 +232,7 @@ class ResourceConflictTest {
                 .as("나머지 9개는 모두 충돌해야 함")
                 .isEqualTo(threadCount - 1);
 
-        System.out.println("✅ 대량 동시성 테스트 통과: 성공=" + successCount.get()
+        System.out.println("대량 동시성 테스트 통과: 성공=" + successCount.get()
                 + ", 충돌=" + conflictCount.get());
     }
 
@@ -243,11 +241,10 @@ class ResourceConflictTest {
     // ====================================================================
 
     private ScheduleCreateRequest request(String title, LocalDate date,
-                                          LocalTime start, LocalTime end,
-                                          Long resourceId) {
+            LocalTime start, LocalTime end,
+            Long resourceId) {
         return new ScheduleCreateRequest(
                 title, null, date, start, end,
-                List.of(), null, resourceId, null
-        );
+                List.of(), null, resourceId, null);
     }
 }
