@@ -41,20 +41,32 @@ public class DataInitializer implements CommandLineRunner {
         Team mgmtTeam = teamRepository.save(Team.builder().name("매니지먼트팀").description("스케줄 및 대외 업무 담당").build());
 
         // Artists
-        memberRepository.save(Member.builder().name("민지").role(MemberRole.ARTIST).position("리더 / 보컬").team(vocalTeam).build());
-        memberRepository.save(Member.builder().name("하니").role(MemberRole.ARTIST).position("메인 보컬").team(vocalTeam).build());
-        memberRepository.save(Member.builder().name("다니엘").role(MemberRole.ARTIST).position("메인 댄서").team(danceTeam).build());
-        memberRepository.save(Member.builder().name("해린").role(MemberRole.ARTIST).position("리드 댄서").team(danceTeam).build());
-        memberRepository.save(Member.builder().name("혜인").role(MemberRole.ARTIST).position("막내 / 댄서").team(danceTeam).build());
+        memberRepository
+                .save(Member.builder().name("예준").role(MemberRole.ARTIST).position("보컬").team(vocalTeam).build());
+        memberRepository
+                .save(Member.builder().name("밤비").role(MemberRole.ARTIST).position("댄서").team(vocalTeam).build());
+        memberRepository
+                .save(Member.builder().name("하민").role(MemberRole.ARTIST).position("래퍼").team(danceTeam).build());
+        memberRepository
+                .save(Member.builder().name("은호").role(MemberRole.ARTIST).position("래퍼").team(danceTeam).build());
+        memberRepository
+                .save(Member.builder().name("노아").role(MemberRole.ARTIST).position("보컬").team(danceTeam).build());
 
         // Staff
-        memberRepository.save(Member.builder().name("김PD").role(MemberRole.STAFF).position("총괄 프로듀서").team(videoTeam).build());
-        memberRepository.save(Member.builder().name("이감독").role(MemberRole.STAFF).position("영상 감독").team(videoTeam).build());
-        memberRepository.save(Member.builder().name("박안무").role(MemberRole.STAFF).position("안무 감독").team(danceTeam).build());
-        memberRepository.save(Member.builder().name("최스타일").role(MemberRole.STAFF).position("수석 스타일리스트").team(styleTeam).build());
-        memberRepository.save(Member.builder().name("정매니저").role(MemberRole.STAFF).position("매니저").team(mgmtTeam).build());
-        memberRepository.save(Member.builder().name("한기술").role(MemberRole.STAFF).position("기술 감독").team(videoTeam).build());
-        memberRepository.save(Member.builder().name("오음악").role(MemberRole.STAFF).position("음악 감독").team(vocalTeam).build());
+        memberRepository
+                .save(Member.builder().name("김PD").role(MemberRole.STAFF).position("총괄 프로듀서").team(videoTeam).build());
+        memberRepository
+                .save(Member.builder().name("이감독").role(MemberRole.STAFF).position("영상 감독").team(videoTeam).build());
+        memberRepository
+                .save(Member.builder().name("박안무").role(MemberRole.STAFF).position("안무 감독").team(danceTeam).build());
+        memberRepository.save(
+                Member.builder().name("최스타일").role(MemberRole.STAFF).position("수석 스타일리스트").team(styleTeam).build());
+        memberRepository
+                .save(Member.builder().name("정매니저").role(MemberRole.STAFF).position("매니저").team(mgmtTeam).build());
+        memberRepository
+                .save(Member.builder().name("한기술").role(MemberRole.STAFF).position("기술 감독").team(videoTeam).build());
+        memberRepository
+                .save(Member.builder().name("오음악").role(MemberRole.STAFF).position("음악 감독").team(vocalTeam).build());
 
         // Resources (venues)
         resourceRepository.save(Resource.builder().name("스튜디오 A").type(ResourceType.STUDIO).build());
