@@ -50,21 +50,7 @@
 
 ## 아키텍처
 
-### 데이터 모델 (ERD)
-
-```mermaid
-erDiagram
-TEAM ||--o{ MEMBER : "has"
-RESOURCE ||--o{ SCHEDULE : "booked_in"
-RESOURCE ||--o{ RECURRENCE_GROUP : "booked_in"
-RECURRENCE_GROUP ||--o{ RECURRENCE_GROUP_PARTICIPANT : "has"
-RECURRENCE_GROUP_PARTICIPANT }o--|| MEMBER : "is"
-SCHEDULE ||--o{ SCHEDULE_PARTICIPANT : "has"
-SCHEDULE_PARTICIPANT }o--|| MEMBER : "is"
-SCHEDULE }o--o| RECURRENCE_GROUP : "exception_of"
-```
-
-### 반복 일정 전략: 규칙 + 예외 하이브리드
+### 반복 일정 전략: 규칙 저장 + 예외 저장 방식
 
 ```
 RecurrenceGroup (규칙)         Schedule (예외 인스턴스)
