@@ -1,0 +1,36 @@
+package com.vlast.scheduler.member.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "members")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class Member {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MemberRole role;
+
+    private String position;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    @Column(nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
+}
