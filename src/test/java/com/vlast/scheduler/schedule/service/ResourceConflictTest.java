@@ -3,6 +3,7 @@ package com.vlast.scheduler.schedule.service;
 import com.vlast.scheduler.common.ResourceConflictException;
 import com.vlast.scheduler.schedule.dto.ScheduleCreateRequest;
 import com.vlast.scheduler.schedule.dto.ScheduleResponse;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,17 @@ class ResourceConflictTest {
     @Autowired
     private ScheduleService scheduleService;
 
+    @Autowired
+    private com.vlast.scheduler.schedule.repository.ScheduleRepository scheduleRepository;
+
     private static final Long STUDIO_A = 1L; // 스튜디오 A (시드 데이터)
+
+    @AfterEach
+    void tearDown() {
+        // 동시성 테스트의 자식 스레드가 생성한 데이터는 메인 스레드의 @Transactional로
+        // 롤백할 수 없으므로, 매 테스트가 끝난 후 명시적으로 스케줄 데이터를 모두 지웁니다.
+        scheduleRepository.deleteAllInBatch();
+    }
 
     // ====================================================================
     // 1. 기본 충돌 감지 테스트
